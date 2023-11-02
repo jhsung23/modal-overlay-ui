@@ -4,7 +4,7 @@
 
 ## 실행 예시
 
-![Nov-02-2023 16-36-00](https://github.com/jhsung23/modal-overlay-ui/assets/69228045/81515d8c-c135-41a3-8814-85e0d0313257)
+![Nov-02-2023 16-36-00](https://github.com/jhsung23/modal-overlay-ui/assets/69228045/d7c14321-fd1f-45fd-b29d-a86f62ad0d03)
 
 ## 사용 방법
 
