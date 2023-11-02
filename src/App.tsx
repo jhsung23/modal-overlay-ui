@@ -1,9 +1,18 @@
 import tw from 'tailwind-styled-components';
+import Form from './components/Form';
+import useOverlay from './hooks/useOverlay/useOverlay';
 
 const App = () => {
+  const overlay = useOverlay();
+
+  const openOverlay = () => {
+    overlay(({ close }) => <Form closeForm={close} />);
+  };
   return (
     <Main>
-      <Button type="button">모달 열기</Button>
+      <Button type="button" onClick={openOverlay}>
+        모달 열기
+      </Button>
     </Main>
   );
 };
