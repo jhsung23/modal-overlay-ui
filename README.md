@@ -1,27 +1,50 @@
-# React + TypeScript + Vite
+# 모달을 선언적으로 다루기
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+원하는 컴포넌트를 useOverlay 커스텀 훅을 사용해 모달처럼 쉽게 띄울 수 있는 방법을 고민하고 구현했습니다.
 
-Currently, two official plugins are available:
+## 실행 예시
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 사용 방법
 
-## Expanding the ESLint configuration
+index.html에 다음 element를 추가합니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```html
+<body>
+  <div id="root"></div>
+  <!-- overlay를 위한 div 추가 -->
+  <div id="overlay"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+App을 OverlayProvider로 감쌉니다.
+
+```typescript
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <OverlayProvider>
+    <App />
+  </OverlayProvider>
+);
+```
+
+모달을 띄워야 하는 상황에서 `useOverlay`를 호출하여 사용합니다.
+
+띄우려는 컴포넌트를 `({close, closeAll}) => ReactNode` 형태로 만들어 다음처럼 호출합니다.
+
+```typescript
+const App = () => {
+  const overlay = useOverlay();
+
+  const openOverlay = () => {
+    overlay(({ close }) => <Form closeForm={close} />);
+  };
+
+  return (
+    <Main>
+      <Button type="button" onClick={openOverlay}>
+        모달 열기
+      </Button>
+    </Main>
+  );
+};
+```
