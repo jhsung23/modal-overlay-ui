@@ -37,14 +37,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 const App = () => {
   const overlay = useOverlay();
 
-  const openOverlay = () => {
+  const openFormModal = () => {
     overlay(({ close }) => <Form closeForm={close} />);
   };
 
   return (
     <Main>
-      <Button type="button" onClick={openOverlay}>
-        모달 열기
+      <Button type="button" onClick={openFormModal}>
+        폼 모달 열기
       </Button>
     </Main>
   );

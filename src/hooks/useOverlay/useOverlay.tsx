@@ -10,14 +10,14 @@ const useOverlay = () => {
 
   const { mount } = context;
 
-  const openOverlay = useCallback(
+  const overlay = useCallback(
     (overlayElementCreator: OverlayElementCreator) => {
       mount(Date.now(), overlayElementCreator);
     },
     [mount]
   );
 
-  return openOverlay;
+  return overlay;
 };
 
 export default useOverlay;
